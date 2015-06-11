@@ -40,7 +40,7 @@ class Twitter extends ScalatraServlet {
     val userId = random.nextInt(1000)
     val requestTokenResponseF = consumer.createRequestTokenRequest(
         KoauthRequest("POST", RequestTokenUrl, None), ConsumerKey, ConsumerSecret,
-          s"http://127.0.0.1:8080/accessToken?$UserId=$userId") flatMap { requestWithInfo =>
+          s"http://koauth-sample-scala-consumer.herokuapp.com/accessToken?$UserId=$userId") flatMap { requestWithInfo =>
       pipeline(pipelining.Post(RequestTokenUrl).withHeaders(RawHeader("Authorization", requestWithInfo.header)))
     } map { response =>
       System.out.println("Response: " + response.entity.asString)
